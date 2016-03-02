@@ -8,6 +8,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,14 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
@@ -48,5 +49,35 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void httpUrlSandbox(View view){
+
+        TextView textElement = (TextView) findViewById(R.id.jsonOutputSpot);
+        textElement.setText("I love you");
+
+        URL url = null;
+        try {
+            url = new URL("http://www.magic.theredbard.com/public/json/?action=carddata&cardname=Jace, the Mind Sculptor&setname=Worldwake");
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+            con.setReadTimeout(10000);
+            con.setConnectTimeout(15000);
+            con.setRequestMethod("GET");
+            con.setDoInput(true);
+            con.connect();
+
+            InputStream in = con.getInputStream();
+            //pick back up here
+
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        //   url = new URL("http://www.magic.theredbard.com/public/json/?action=carddata&cardname=Jace, the Mind Sculptor&setname=Worldwake");
+
     }
 }
