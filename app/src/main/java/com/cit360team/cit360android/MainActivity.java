@@ -10,12 +10,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import org.quickconnectfamily.json.JSONException;
+import org.quickconnectfamily.json.JSONUtilities;
+import org.quickconnectfamily.json.ParseException;
+
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,30 +60,20 @@ public class MainActivity extends AppCompatActivity {
     public void httpUrlSandbox(View view){
 
         TextView textElement = (TextView) findViewById(R.id.jsonOutputSpot);
-        textElement.setText("I love you");
+        String urlString = "http://www.magic.theredbard.com/public/json/?action=carddata&cardname=Jace,%20the%20Mind%20Sculptor&setname=Worldwake";
+        String result = null;
 
-        URL url = null;
+        HttpThread httpThread = new HttpThread(urlString);
+
+        Thread thread = new Thread(httpThread);
+        thread.start();
         try {
-            url = new URL("http://www.magic.theredbard.com/public/json/?action=carddata&cardname=Jace, the Mind Sculptor&setname=Worldwake");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-            con.setReadTimeout(10000);
-            con.setConnectTimeout(15000);
-            con.setRequestMethod("GET");
-            con.setDoInput(true);
-            con.connect();
-
-            InputStream in = con.getInputStream();
-            //pick back up here
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            thread.join();
+            result = httpThread.getReturnString();
+            textElement.setText(result);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
-
-        //   url = new URL("http://www.magic.theredbard.com/public/json/?action=carddata&cardname=Jace, the Mind Sculptor&setname=Worldwake");
 
     }
 }
