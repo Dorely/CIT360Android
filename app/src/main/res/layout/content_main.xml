@@ -12,32 +12,115 @@
     tools:context="com.cit360team.cit360android.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="HTTPURL Connector for Android"
-        android:layout_marginTop="41dp"
-        android:id="@+id/titleText"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="3"
+        android:rowCount="5">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Touch Me!"
-        android:id="@+id/button"
-        android:layout_marginTop="43dp"
-        android:layout_below="@+id/titleText"
-        android:layout_centerHorizontal="true"
-        android:clickable="false"
-        android:onClick="httpUrlSandbox" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HTTPURL Connector for Android"
+            android:id="@+id/titleText"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_column="0"
+            android:layout_columnSpan="3"
+            android:layout_row="0" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Json Data Output here"
-        android:id="@+id/jsonOutputSpot"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true" />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Happy Path"
+            android:id="@+id/button"
+            android:clickable="false"
+            android:onClick="httpUrlSandbox"
+            android:layout_below="@+id/titleText"
+            android:layout_alignStart="@+id/titleText"
+            android:layout_column="0"
+            android:layout_row="1" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NoThread"
+            android:id="@+id/button2"
+            android:onClick="noThreadNasty"
+            android:layout_below="@+id/button"
+            android:layout_toStartOf="@+id/jsonOutputSpot"
+            android:layout_column="1"
+            android:layout_row="1" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Null arg"
+            android:id="@+id/button3"
+            android:onClick="nullUrlNasty"
+            android:layout_below="@+id/button5"
+            android:layout_toEndOf="@+id/jsonOutputSpot"
+            android:layout_column="2"
+            android:layout_row="1" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Non JSON url"
+            android:id="@+id/button4"
+            android:onClick="notJsonUrlNasty"
+            android:layout_below="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_column="0"
+            android:layout_row="2" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bad Url"
+            android:id="@+id/button5"
+            android:onClick="badUrlNasty"
+            android:layout_above="@+id/button4"
+            android:layout_alignEnd="@+id/titleText"
+            android:layout_column="1"
+            android:layout_row="2" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bad method"
+            android:id="@+id/button6"
+            android:layout_row="2"
+            android:layout_column="2"
+            android:onClick="badMethodNasty" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Malformed URL"
+            android:id="@+id/button7"
+            android:layout_row="3"
+            android:layout_column="0"
+            android:onClick="malformedUrlNasty" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Json Data Output here"
+            android:id="@+id/jsonOutputSpot"
+            android:layout_below="@+id/button3"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="25dp"
+            android:layout_row="4"
+            android:layout_column="0"
+            android:layout_columnSpan="3" />
+
+    </GridLayout>
+
 </RelativeLayout>
